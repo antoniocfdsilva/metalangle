@@ -199,7 +199,7 @@ IOSWindow::~IOSWindow()
     destroy();
 }
 
-bool IOSWindow::initialize(const std::string &name, size_t width, size_t height)
+bool IOSWindow::initialize(const std::string &name, int width, int height)
 {
     ASSERT(!gMainIOSWindow);
 

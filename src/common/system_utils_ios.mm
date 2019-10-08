@@ -9,6 +9,8 @@
 #include "system_utils.h"
 
 #import <Foundation/Foundation.h>
+#include <mach/mach.h>
+#include <mach/mach_time.h>
 
 #include <dlfcn.h>
 #include <sys/stat.h>
@@ -146,6 +148,15 @@ void BreakDebugger()
 {
     // TODO(hqle).
     abort();
+}
+
+double GetCurrentTime()
+{
+    mach_timebase_info_data_t timebaseInfo;
+    mach_timebase_info(&timebaseInfo);
+
+    double secondCoeff = timebaseInfo.numer * 1e-9 / timebaseInfo.denom;
+    return secondCoeff * mach_absolute_time();
 }
 
 }  // namespace angle
